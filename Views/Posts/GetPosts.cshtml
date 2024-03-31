@@ -1,0 +1,25 @@
+﻿
+
+@model PagedList<Post>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Posts</h1>
+@{
+    var items = Model.Items;
+}
+@if (items != null && items.Count > 0)
+{
+    <ul>
+        @foreach (var post in items)
+        {
+            <li>@post.Title</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No posts found.</p>
+}

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Reddit;
 using Reddit.Dtos;
 using Reddit.Mapper;
 using Reddit.Models;
@@ -11,7 +10,7 @@ namespace Reddit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class PostsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -26,10 +25,10 @@ namespace Reddit.Controllers
 
         // GET: api/Posts
         [HttpGet]
-        public async Task<IEnumerable<string>> GetPosts(GetPostsRequest getPostsRequest)
+        public async Task<ActionResult> GetPosts(GetPostsRequest getPostsRequest)
         {
-          var pL =  await _postsRepository.GetAll(getPostsRequest);
-           return pL.Items.Select(p => p.Title);
+            var posts = await _postsRepository.GetAll(getPostsRequest);
+            return View(posts);
         }
 
         // GET: api/Posts/5
