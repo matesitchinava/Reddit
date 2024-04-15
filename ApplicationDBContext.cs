@@ -3,9 +3,9 @@ using Reddit.Models;
 
 namespace Reddit
 {
-    public class ApplcationDBContext: DbContext
+    public class ApplicationDBContext: DbContext
     {
-        public ApplcationDBContext(DbContextOptions<ApplcationDBContext> dbContextOptions): base(dbContextOptions)
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> dbContextOptions): base(dbContextOptions)
         {
         }
 

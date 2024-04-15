@@ -4,27 +4,33 @@ using Reddit;
 using Reddit.Dtos;
 using Reddit.Mapper;
 using Reddit.Models;
+using Reddit.Repositories;
+using Reddit.Requests;
 
 namespace Reddit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class PostsController : Controller
     {
-        private readonly ApplcationDBContext _context;
+        private readonly ApplicationDBContext _context;
         private readonly IMapper _mapper;
+        private readonly IPostsRepository _postsRepository;
 
-        public PostsController(ApplcationDBContext context, IMapper mapper)
+
+        public PostsController(ApplicationDBContext context, IMapper mapper, IPostsRepository postsRepository)
         {
             _context = context;
             _mapper = mapper;
+            _postsRepository = postsRepository;
         }
 
         // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<IActionResult> GetPosts(GetPostsRequest getPostsRequest)
         {
-            return await _context.Posts.ToListAsync();
+            var pL = await _postsRepository.GetAll(getPostsRequest);
+            return View(pL);
         }
 
         // GET: api/Posts/5
@@ -34,7 +40,7 @@ namespace Reddit.Controllers
             var post = await _context.Posts.FindAsync(id);
 
             if (post == null)
-            {
+        {
                 return NotFound();
             }
 

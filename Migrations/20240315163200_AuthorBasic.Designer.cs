@@ -9,7 +9,7 @@ using Reddit;
 
 namespace Reddit.Migrations
 {
-    [DbContext(typeof(ApplcationDBContext))]
+    [DbContext(typeof(ApplicationDBContext))]
     [Migration("20240315163200_AuthorBasic")]
     partial class AuthorBasic
     {

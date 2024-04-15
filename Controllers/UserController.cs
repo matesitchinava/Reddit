@@ -10,9 +10,9 @@ namespace Reddit.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ApplcationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public UserController(ApplcationDBContext context)
+        public UserController(ApplicationDBContext context)
         {
             _context = context;
         }
